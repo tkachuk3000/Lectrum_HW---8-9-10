@@ -30,7 +30,7 @@ export default class Like extends Component{
     _showLikers = () => {
         this.setState({
             showLikers: true
-        })
+        });
     };
 
     _hideLikers = () => {
@@ -46,13 +46,11 @@ export default class Like extends Component{
     }
 
     _getLikedByMe = () => {
-        // console.log(this.props);
-        const  { currentUsterFirstName, currentUsterLastName, likes} = this.props;
-
-        return likes.some (({firstName,lastName}) =>{
+        const  { currentUserFirstName, currentUserLastName, likes} = this.props;
+        return likes.some(({firstName,lastName}) =>{
             return (
                 `${firstName} ${lastName}` === 
-                `${currentUsterFirstName} ${currentUsterLastName}`
+                `${currentUserFirstName} ${currentUserLastName}`
             );
         });
         
@@ -78,12 +76,12 @@ export default class Like extends Component{
     }
 
     _getLikesDescription = () => {
-        const { likes, currentUsterFirstName, currentUsterLastName } = this.props;
+        const { likes, currentUserFirstName, currentUserLastName } = this.props;
 
         const likedByMe =  this._getLikedByMe();
 
         if (likes.length === 1 && likedByMe) {
-            return `${currentUsterFirstName} ${currentUsterLastName}`
+            return `${currentUserFirstName} ${currentUserLastName}`
         } else if ( likes.length === 2 && likedByMe) {
             return `You and ${likes.length - 1} other`
         }
@@ -95,7 +93,7 @@ export default class Like extends Component{
         const likeStyles = this._getLikeStyles();
         const likersList = this._getLikersList();
         const likesDescription = this._getLikesDescription();
-
+        // throw new Error();
         return (
             <section className = { Styles.like }>
                 <span className = { likeStyles } onClick = {this._likePost} >Like</span>
